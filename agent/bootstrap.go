@@ -920,26 +920,26 @@ func (b *Bootstrap) Start() error {
 			b.runCommand("git", "fetch", "-v", "origin", b.RefSpec)
 			b.runCommand("git", "checkout", "-f", b.Commit)
 
-		// GitHub has a special ref which lets us fetch a pull request head, whether
-		// or not there is a current head in this repository or another which
-		// references the commit. We presume a commit sha is provided. See:
-		// https://help.github.com/articles/checking-out-pull-requests-locally/#modifying-an-inactive-pull-request-locally
 		} else if b.PullRequest != "false" && strings.Contains(b.PipelineProvider, "github") {
+			// GitHub has a special ref which lets us fetch a pull request head, whether
+			// or not there is a current head in this repository or another which
+			// references the commit. We presume a commit sha is provided. See:
+			// https://help.github.com/articles/checking-out-pull-requests-locally/#modifying-an-inactive-pull-request-locally
 			commentf("Fetch and checkout pull request head")
 			b.runCommand("git", "fetch", "-v", "origin", "refs/pull/" + b.PullRequest + "/head")
 			b.runCommand("git", "checkout", "-f", b.Commit)
 
-		// If the commit is "HEAD" then we can't do a commit-specific fetch and will
-		// need to fetch the remote head and checkout the fetched head explicitly.
 		} else if b.Commit == "HEAD" {
+			// If the commit is "HEAD" then we can't do a commit-specific fetch and will
+			// need to fetch the remote head and checkout the fetched head explicitly.
 			commentf("Fetch and checkout remote branch HEAD commit")
 			b.runCommand("git", "fetch", "-v", "origin", b.Branch)
 			b.runCommand("git", "checkout", "-f", "FETCH_HEAD")
 
-		// Otherwise fetch and checkout the commit directly. Some repositories don't
-		// support fetching a specific commit so we fall back to fetching all heads
-		// and tags, hoping that the commit is included.
 		} else {
+			// Otherwise fetch and checkout the commit directly. Some repositories don't
+			// support fetching a specific commit so we fall back to fetching all heads
+			// and tags, hoping that the commit is included.
 			commentf("Fetch and checkout commit")
 			gitFetchExitStatus := b.runCommandGracefully("git", "fetch", "-v", "origin", b.Commit)
 			if gitFetchExitStatus != 0 {
@@ -952,7 +952,6 @@ func (b *Bootstrap) Start() error {
 			}
 			b.runCommand("git", "checkout", "-f", b.Commit)
 		}
-
 
 		if b.GitSubmodules {
 			// `submodule sync` will ensure the .git/config
