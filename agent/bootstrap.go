@@ -926,7 +926,7 @@ func (b *Bootstrap) Start() error {
 			// references the commit. We presume a commit sha is provided. See:
 			// https://help.github.com/articles/checking-out-pull-requests-locally/#modifying-an-inactive-pull-request-locally
 			commentf("Fetch and checkout pull request head")
-			b.runCommand("git", "fetch", "-v", "origin", "refs/pull/" + b.PullRequest + "/head")
+			b.runCommand("git", "fetch", "-v", "origin", "refs/pull/"+b.PullRequest+"/head")
 			b.runCommand("git", "checkout", "-f", b.Commit)
 
 		} else if b.Commit == "HEAD" {
