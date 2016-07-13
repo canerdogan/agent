@@ -13,6 +13,12 @@
 			"path": "golang.org/x/crypto/ssh/terminal",
 			"revision": "2c99acdd1e9b90d779ca23f632aad86af9909c62",
 			"revisionTime": "2016-07-10T22:38:34Z"
+		},
+		{
+			"checksumSHA1": "u+JDryy6bZepL09sUIM6cFdp+UU=",
+			"path": "golang.org/x/net",
+			"revision": "f841c39de738b1d0df95b5a7187744f0e03d8112",
+			"revisionTime": "2016-06-30T00:53:42Z"
 		}
 	],
 	"rootPath": "github.com/buildkite/agent"
